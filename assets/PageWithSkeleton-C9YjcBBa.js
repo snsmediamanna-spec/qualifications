@@ -1,0 +1,1 @@
+import{r,j as t}from"./index-a8uIWsMy.js";function m({skeleton:s,children:n,delay:e=500}){const[o,i]=r.useState(!0);return r.useEffect(()=>{const a=setTimeout(()=>{i(!1)},e);return()=>clearTimeout(a)},[e]),o?t.jsx(t.Fragment,{children:s}):t.jsx(t.Fragment,{children:n})}export{m as P};

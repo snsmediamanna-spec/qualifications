@@ -1,1 +1,0 @@
-import{a as r,j as t}from"./react-core-DM_sQ5hc.js";function m({skeleton:s,children:n,delay:e=500}){const[o,a]=r.useState(!0);return r.useEffect(()=>{const i=setTimeout(()=>{a(!1)},e);return()=>clearTimeout(i)},[e]),o?t.jsx(t.Fragment,{children:s}):t.jsx(t.Fragment,{children:n})}export{m as P};
