@@ -1,0 +1,674 @@
+/**
+ * 완전히 일관된 모바일 경험
+ * 
+ * 핵심 원칙:
+ * - viewport width < 1024px = 무조건 모바일 경험
+ * - 모든 크기를 375px 기준으로 정규화
+ * - devicePixelRatio, User Agent 무시
+ * - clamp() 대신 고정 rem 값 사용
+ */
+
+/* ========================================
+   0. 기본 리셋 (모바일 전용)
+   ======================================== */
+
+@media (max-width: 1023px) {
+  * {
+    /* 모든 responsive/device-compatibility CSS 무효화 */
+    --font-size-xs: initial !important;
+    --font-size-sm: initial !important;
+    --font-size-base: initial !important;
+    --font-size-lg: initial !important;
+    --font-size-xl: initial !important;
+    --font-size-2xl: initial !important;
+    --font-size-3xl: initial !important;
+  }
+  
+  /* ✅ Safe Area 변수 정의 */
+  :root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* ========================================
+   1. 루트 폰트 크기 정규화
+   375px 기준 = 16px
+   ======================================== */
+
+@media (max-width: 1023px) {
+  html {
+    /* 375px 기준으로 정규화 */
+    font-size: calc(100vw / 375 * 16) !important;
+    
+    /* 최소/최대 제한 */
+    font-size: clamp(14px, calc(100vw / 375 * 16), 18px) !important;
+  }
+}
+
+/* ========================================
+   2. 고정 타이포그래피 시스템
+   ======================================== */
+
+@media (max-width: 1023px) {
+  :root {
+    /* rem 기반 고정값 (375px 기준) */
+    --font-xs: 0.75rem;   /* 12px */
+    --font-sm: 0.875rem;  /* 14px */
+    --font-base: 1rem;    /* 16px */
+    --font-lg: 1.125rem;  /* 18px */
+    --font-xl: 1.25rem;   /* 20px */
+    --font-2xl: 1.5rem;   /* 24px */
+    --font-3xl: 1.875rem; /* 30px */
+    --font-4xl: 2.25rem;  /* 36px */
+    --font-5xl: 3rem;     /* 48px */
+    
+    /* 고정 간격 */
+    --space-xs: 0.25rem;  /* 4px */
+    --space-sm: 0.5rem;   /* 8px */
+    --space-md: 1rem;     /* 16px */
+    --space-lg: 1.5rem;   /* 24px */
+    --space-xl: 2rem;     /* 32px */
+    --space-2xl: 2.5rem;  /* 40px */
+    --space-3xl: 3rem;    /* 48px */
+    
+    /* 고정 터치 타겟 */
+    --touch-min: 2.75rem; /* 44px */
+    
+    /* 고정 컨테이너 패딩 */
+    --container-padding: 1rem; /* 16px */
+  }
+  
+  /* 기본 폰트 크기 적용 */
+  body {
+    font-size: var(--font-base);
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* 제목 크기 고정 */
+  h1 {
+    font-size: var(--font-3xl);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  
+  h2 {
+    font-size: var(--font-2xl);
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  
+  h3 {
+    font-size: var(--font-xl);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  
+  h4 {
+    font-size: var(--font-lg);
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  
+  /* 본문 크기 고정 */
+  p {
+    font-size: var(--font-base);
+    line-height: 1.6;
+  }
+  
+  /* 작은 텍스트 */
+  small,
+  .text-sm {
+    font-size: var(--font-sm);
+  }
+  
+  /* 매우 작은 텍스트 */
+  .text-xs {
+    font-size: var(--font-xs);
+  }
+  
+  /* 큰 텍스트 */
+  .text-lg {
+    font-size: var(--font-lg);
+  }
+  
+  .text-xl {
+    font-size: var(--font-xl);
+  }
+  
+  .text-2xl {
+    font-size: var(--font-2xl);
+  }
+  
+  .text-3xl {
+    font-size: var(--font-3xl);
+  }
+}
+
+/* ========================================
+   3. 컨테이너 및 레이아웃
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .container,
+  [class*="container"] {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    max-width: 100%;
+  }
+  
+  /* 섹션 간격 */
+  section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+  
+  /* 카드 간격 */
+  .card,
+  [class*="card"] {
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* ========================================
+   4. 버튼 및 인터랙티브 요소
+   ======================================== */
+
+@media (max-width: 1023px) {
+  button,
+  .btn,
+  [role="button"],
+  a[class*="btn"] {
+    font-size: var(--font-base);
+    min-height: var(--touch-min);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+  }
+  
+  /* 작은 버튼 */
+  button.btn-sm,
+  .btn-sm {
+    font-size: var(--font-sm);
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* 큰 버튼 */
+  button.btn-lg,
+  .btn-lg {
+    font-size: var(--font-lg);
+    min-height: 3.5rem;
+    padding: 1rem 2rem;
+  }
+  
+  /* 입력 필드 */
+  input,
+  textarea,
+  select {
+    font-size: var(--font-base);
+    min-height: var(--touch-min);
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  /* 체크박스/라디오 */
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    min-height: auto;
+  }
+}
+
+/* ========================================
+   5. iOS 스타일 카드
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .ios-card,
+  [class*="ios-card"] {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 1.25rem;
+    padding: var(--space-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  .ios-card-header {
+    font-size: var(--font-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+  
+  .ios-card-body {
+    font-size: var(--font-base);
+  }
+  
+  .ios-card-footer {
+    font-size: var(--font-sm);
+    margin-top: var(--space-md);
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ========================================
+   6. 네비게이션
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* 하단 네비게이션 */
+  .mobile-bottom-nav,
+  [class*="bottom-nav"],
+  [class*="BottomNav"] {
+    height: 5rem;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  .nav-item,
+  [class*="nav-item"] {
+    font-size: var(--font-xs);
+    min-width: var(--touch-min);
+    min-height: var(--touch-min);
+  }
+  
+  .nav-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* 상단 헤더 */
+  header {
+    min-height: 3.5rem;
+    padding: var(--space-md) var(--container-padding);
+    padding-top: calc(env(safe-area-inset-top, 0) + var(--space-md));
+  }
+  
+  .header-title {
+    font-size: var(--font-lg);
+    font-weight: 600;
+  }
+}
+
+/* ========================================
+   7. 그리드 시스템
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .grid,
+  [class*="grid"] {
+    display: grid;
+    gap: var(--space-md);
+  }
+  
+  /* 1열 (기본) */
+  .grid-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 2열 */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* 3열 */
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* 4열 */
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* 자동 */
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  }
+}
+
+/* ========================================
+   8. 스페이싱 유틸리티
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* 마진 */
+  .m-0 { margin: 0 !important; }
+  .m-xs { margin: var(--space-xs) !important; }
+  .m-sm { margin: var(--space-sm) !important; }
+  .m-md { margin: var(--space-md) !important; }
+  .m-lg { margin: var(--space-lg) !important; }
+  .m-xl { margin: var(--space-xl) !important; }
+  
+  .mt-0 { margin-top: 0 !important; }
+  .mt-xs { margin-top: var(--space-xs) !important; }
+  .mt-sm { margin-top: var(--space-sm) !important; }
+  .mt-md { margin-top: var(--space-md) !important; }
+  .mt-lg { margin-top: var(--space-lg) !important; }
+  .mt-xl { margin-top: var(--space-xl) !important; }
+  
+  .mb-0 { margin-bottom: 0 !important; }
+  .mb-xs { margin-bottom: var(--space-xs) !important; }
+  .mb-sm { margin-bottom: var(--space-sm) !important; }
+  .mb-md { margin-bottom: var(--space-md) !important; }
+  .mb-lg { margin-bottom: var(--space-lg) !important; }
+  .mb-xl { margin-bottom: var(--space-xl) !important; }
+  
+  .mx-auto { margin-left: auto !important; margin-right: auto !important; }
+  
+  /* 패딩 */
+  .p-0 { padding: 0 !important; }
+  .p-xs { padding: var(--space-xs) !important; }
+  .p-sm { padding: var(--space-sm) !important; }
+  .p-md { padding: var(--space-md) !important; }
+  .p-lg { padding: var(--space-lg) !important; }
+  .p-xl { padding: var(--space-xl) !important; }
+  
+  .pt-0 { padding-top: 0 !important; }
+  .pt-xs { padding-top: var(--space-xs) !important; }
+  .pt-sm { padding-top: var(--space-sm) !important; }
+  .pt-md { padding-top: var(--space-md) !important; }
+  .pt-lg { padding-top: var(--space-lg) !important; }
+  .pt-xl { padding-top: var(--space-xl) !important; }
+  
+  .pb-0 { padding-bottom: 0 !important; }
+  .pb-xs { padding-bottom: var(--space-xs) !important; }
+  .pb-sm { padding-bottom: var(--space-sm) !important; }
+  .pb-md { padding-bottom: var(--space-md) !important; }
+  .pb-lg { padding-bottom: var(--space-lg) !important; }
+  .pb-xl { padding-bottom: var(--space-xl) !important; }
+  
+  .px-0 { padding-left: 0 !important; padding-right: 0 !important; }
+  .px-xs { padding-left: var(--space-xs) !important; padding-right: var(--space-xs) !important; }
+  .px-sm { padding-left: var(--space-sm) !important; padding-right: var(--space-sm) !important; }
+  .px-md { padding-left: var(--space-md) !important; padding-right: var(--space-md) !important; }
+  .px-lg { padding-left: var(--space-lg) !important; padding-right: var(--space-lg) !important; }
+  .px-xl { padding-left: var(--space-xl) !important; padding-right: var(--space-xl) !important; }
+  
+  .py-0 { padding-top: 0 !important; padding-bottom: 0 !important; }
+  .py-xs { padding-top: var(--space-xs) !important; padding-bottom: var(--space-xs) !important; }
+  .py-sm { padding-top: var(--space-sm) !important; padding-bottom: var(--space-sm) !important; }
+  .py-md { padding-top: var(--space-md) !important; padding-bottom: var(--space-md) !important; }
+  .py-lg { padding-top: var(--space-lg) !important; padding-bottom: var(--space-lg) !important; }
+  .py-xl { padding-top: var(--space-xl) !important; padding-bottom: var(--space-xl) !important; }
+}
+
+/* ========================================
+   9. 플렉스박스 유틸리티
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .flex { display: flex !important; }
+  .flex-col { flex-direction: column !important; }
+  .flex-row { flex-direction: row !important; }
+  
+  .items-start { align-items: flex-start !important; }
+  .items-center { align-items: center !important; }
+  .items-end { align-items: flex-end !important; }
+  .items-stretch { align-items: stretch !important; }
+  
+  .justify-start { justify-content: flex-start !important; }
+  .justify-center { justify-content: center !important; }
+  .justify-end { justify-content: flex-end !important; }
+  .justify-between { justify-content: space-between !important; }
+  .justify-around { justify-content: space-around !important; }
+  
+  .gap-0 { gap: 0 !important; }
+  .gap-xs { gap: var(--space-xs) !important; }
+  .gap-sm { gap: var(--space-sm) !important; }
+  .gap-md { gap: var(--space-md) !important; }
+  .gap-lg { gap: var(--space-lg) !important; }
+  .gap-xl { gap: var(--space-xl) !important; }
+  
+  .flex-1 { flex: 1 !important; }
+  .flex-wrap { flex-wrap: wrap !important; }
+  .flex-nowrap { flex-wrap: nowrap !important; }
+}
+
+/* ========================================
+   10. 가시성 유틸리티
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-visible {
+    display: block !important;
+  }
+  
+  .mobile-flex {
+    display: flex !important;
+  }
+  
+  .mobile-grid {
+    display: grid !important;
+  }
+}
+
+/* ========================================
+   11. 위치 및 z-index
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .relative { position: relative !important; }
+  .absolute { position: absolute !important; }
+  .fixed { position: fixed !important; }
+  .sticky { position: sticky !important; }
+  
+  .inset-0 {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+  }
+  
+  .z-0 { z-index: 0 !important; }
+  .z-10 { z-index: 10 !important; }
+  .z-20 { z-index: 20 !important; }
+  .z-30 { z-index: 30 !important; }
+  .z-40 { z-index: 40 !important; }
+  .z-50 { z-index: 50 !important; }
+  .z-100 { z-index: 100 !important; }
+  .z-999 { z-index: 999 !important; }
+  .z-9999 { z-index: 9999 !important; }
+}
+
+/* ========================================
+   12. 텍스트 정렬 및 스타일
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .text-left { text-align: left !important; }
+  .text-center { text-align: center !important; }
+  .text-right { text-align: right !important; }
+  
+  .font-normal { font-weight: 400 !important; }
+  .font-medium { font-weight: 500 !important; }
+  .font-semibold { font-weight: 600 !important; }
+  .font-bold { font-weight: 700 !important; }
+  
+  .truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
+
+/* ========================================
+   13. 오버플로우 및 스크롤
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .overflow-hidden { overflow: hidden !important; }
+  .overflow-auto { overflow: auto !important; }
+  .overflow-scroll { overflow: scroll !important; }
+  
+  .overflow-x-hidden { overflow-x: hidden !important; }
+  .overflow-x-auto { overflow-x: auto !important; }
+  .overflow-x-scroll { overflow-x: scroll !important; }
+  
+  .overflow-y-hidden { overflow-y: hidden !important; }
+  .overflow-y-auto { overflow-y: auto !important; }
+  .overflow-y-scroll { overflow-y: scroll !important; }
+  
+  /* iOS 부드러운 스크롤 */
+  .overflow-auto,
+  .overflow-scroll,
+  .overflow-x-auto,
+  .overflow-x-scroll,
+  .overflow-y-auto,
+  .overflow-y-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ========================================
+   14. Safe Area 대응 (노치/다이내믹 아일랜드)
+   ======================================== */
+
+@media (max-width: 1023px) {
+  @supports (padding-top: env(safe-area-inset-top)) {
+    .safe-top {
+      padding-top: env(safe-area-inset-top) !important;
+    }
+    
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+    
+    .safe-left {
+      padding-left: env(safe-area-inset-left) !important;
+    }
+    
+    .safe-right {
+      padding-right: env(safe-area-inset-right) !important;
+    }
+    
+    .safe-all {
+      padding-top: env(safe-area-inset-top) !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+      padding-left: env(safe-area-inset-left) !important;
+      padding-right: env(safe-area-inset-right) !important;
+    }
+  }
+}
+
+/* ========================================
+   15. 성능 최적화
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* GPU 가속 */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* 탭 하이라이트 제거 */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  /* 버튼/인터랙티브 요소 선택 방지 제거 (텍스트 선택 허용) */
+  /* button,
+  [role="button"],
+  .nav-item,
+  .btn {
+    -webkit-user-select: none;
+    user-select: none;
+  } */
+  
+  /* 스크롤 최적화 */
+  body,
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}
+
+/* ========================================
+   16. 접근성 (다크 모드)
+   ======================================== */
+
+@media (max-width: 1023px) and (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #000000;
+    --bg-secondary: #1c1c1e;
+    --bg-tertiary: #2c2c2e;
+    
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-tertiary: rgba(255, 255, 255, 0.4);
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+  }
+  
+  .ios-card,
+  [class*="ios-card"] {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+  }
+  
+  input,
+  textarea,
+  select {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+}
+
+/* ========================================
+   17. 애니메이션 최소화 (배터리 세이버)
+   ======================================== */
+
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   18. 디버그 정보 숨김 (프로덕션)
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .debug-info,
+  [class*="debug"],
+  body::after {
+    display: none !important;
+  }
+}

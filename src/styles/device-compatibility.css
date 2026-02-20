@@ -1,0 +1,625 @@
+/**
+ * 종합 기기 호환성 시스템
+ * 
+ * 지원 기기:
+ * - 갤럭시 S 시리즈 (S ~ S26)
+ * - 갤럭시 Z 시리즈 (폴드/플립)
+ * - 갤럭시 노트 시리즈
+ * - 아이폰 전 라인업 (초대 ~ 17 시리즈)
+ * - 아이폰 SE 시리즈
+ */
+
+/* ========================================
+   1. 초소형 화면 (Ultra Small)
+   iPhone SE 1세대, 갤럭시 S 초기
+   320px ~ 360px
+   ======================================== */
+
+@media (max-width: 1023px) and (max-width: 360px) {
+  :root {
+    /* 초소형 화면 최적화 */
+    --font-size-xs: clamp(0.8rem, 3.5vw + 0.35rem, 1rem);
+    --font-size-sm: clamp(0.95rem, 4vw + 0.45rem, 1.15rem);
+    --font-size-base: clamp(1.05rem, 4.5vw + 0.55rem, 1.3rem);
+    --font-size-lg: clamp(1.2rem, 5vw + 0.65rem, 1.45rem);
+    --font-size-xl: clamp(1.4rem, 5.5vw + 0.75rem, 1.75rem);
+    --font-size-2xl: clamp(1.7rem, 6.5vw + 0.85rem, 2.25rem);
+    --font-size-3xl: clamp(2.1rem, 7.5vw + 0.95rem, 2.9rem);
+    
+    --spacing-xs: clamp(0.3rem, 1.8vw, 0.65rem);
+    --spacing-sm: clamp(0.6rem, 2.8vw, 0.95rem);
+    --spacing-md: clamp(0.85rem, 3.5vw, 1.25rem);
+    --spacing-lg: clamp(1.1rem, 4vw, 1.8rem);
+    --spacing-xl: clamp(1.7rem, 5.5vw, 2.4rem);
+    
+    --touch-target-min: 3.2rem; /* 51.2px */
+    --container-padding: clamp(1rem, 5vw, 1.6rem);
+  }
+  
+  /* 컨텐츠 여백 축소 */
+  .container {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+  
+  /* 버튼 크기 확대 */
+  button,
+  .btn {
+    font-size: clamp(1.05rem, 4.5vw + 0.55rem, 1.3rem);
+    padding: clamp(0.85rem, 3.5vw, 1.2rem) clamp(1.1rem, 4.5vw, 1.5rem);
+  }
+}
+
+/* ========================================
+   2. 소형 화면 (Small)
+   iPhone 12 mini, 13 mini, Z Flip (접힌 상태)
+   361px ~ 375px
+   ======================================== */
+
+@media (max-width: 1023px) and (min-width: 361px) and (max-width: 375px) {
+  :root {
+    --font-size-xs: clamp(0.78rem, 3.2vw + 0.4rem, 0.95rem);
+    --font-size-sm: clamp(0.92rem, 3.6vw + 0.5rem, 1.12rem);
+    --font-size-base: clamp(1.03rem, 4vw + 0.6rem, 1.25rem);
+    --font-size-lg: clamp(1.18rem, 4.5vw + 0.7rem, 1.4rem);
+    --font-size-xl: clamp(1.35rem, 5vw + 0.8rem, 1.65rem);
+    --font-size-2xl: clamp(1.65rem, 5.8vw + 0.9rem, 2.15rem);
+    --font-size-3xl: clamp(2rem, 6.8vw + 1rem, 2.75rem);
+    
+    --spacing-xs: clamp(0.28rem, 1.5vw, 0.58rem);
+    --spacing-sm: clamp(0.55rem, 2.5vw, 0.88rem);
+    --spacing-md: clamp(0.8rem, 3vw, 1.15rem);
+    --spacing-lg: clamp(1.05rem, 3.6vw, 1.65rem);
+    --spacing-xl: clamp(1.6rem, 5vw, 2.25rem);
+    
+    --touch-target-min: 3rem;
+    --container-padding: clamp(1rem, 4.5vw, 1.5rem);
+  }
+}
+
+/* ========================================
+   3. 중형 화면 (Medium)
+   iPhone 13, 14, SE 3세대, 갤럭시 S 중기
+   376px ~ 390px
+   ======================================== */
+
+@media (max-width: 1023px) and (min-width: 376px) and (max-width: 390px) {
+  :root {
+    --font-size-xs: clamp(0.75rem, 3vw + 0.45rem, 0.92rem);
+    --font-size-sm: clamp(0.9rem, 3.4vw + 0.55rem, 1.08rem);
+    --font-size-base: clamp(1rem, 3.8vw + 0.65rem, 1.2rem);
+    --font-size-lg: clamp(1.15rem, 4.2vw + 0.75rem, 1.35rem);
+    --font-size-xl: clamp(1.3rem, 4.7vw + 0.85rem, 1.6rem);
+    --font-size-2xl: clamp(1.6rem, 5.3vw + 0.95rem, 2.05rem);
+    --font-size-3xl: clamp(1.95rem, 6.3vw + 1.05rem, 2.65rem);
+    
+    --spacing-xs: clamp(0.25rem, 1.3vw, 0.52rem);
+    --spacing-sm: clamp(0.5rem, 2.3vw, 0.82rem);
+    --spacing-md: clamp(0.75rem, 2.8vw, 1.05rem);
+    --spacing-lg: clamp(1rem, 3.4vw, 1.55rem);
+    --spacing-xl: clamp(1.5rem, 4.7vw, 2.15rem);
+    
+    --touch-target-min: 2.95rem;
+    --container-padding: clamp(1rem, 4.2vw, 1.45rem);
+  }
+}
+
+/* ========================================
+   4. 표준 화면 (Standard)
+   iPhone 15, 16, 갤럭시 S 최신
+   391px ~ 414px
+   ======================================== */
+
+@media (max-width: 1023px) and (min-width: 391px) and (max-width: 414px) {
+  :root {
+    /* 가장 일반적인 크기 - 최적 균형 */
+    --font-size-xs: clamp(0.75rem, 2.8vw + 0.48rem, 0.9rem);
+    --font-size-sm: clamp(0.9rem, 3.2vw + 0.58rem, 1.05rem);
+    --font-size-base: clamp(1rem, 3.6vw + 0.68rem, 1.18rem);
+    --font-size-lg: clamp(1.15rem, 4vw + 0.78rem, 1.32rem);
+    --font-size-xl: clamp(1.3rem, 4.5vw + 0.88rem, 1.55rem);
+    --font-size-2xl: clamp(1.6rem, 5vw + 0.98rem, 2rem);
+    --font-size-3xl: clamp(1.95rem, 6vw + 1.08rem, 2.6rem);
+    
+    --spacing-xs: clamp(0.25rem, 1.2vw, 0.5rem);
+    --spacing-sm: clamp(0.5rem, 2.2vw, 0.78rem);
+    --spacing-md: clamp(0.75rem, 2.7vw, 1rem);
+    --spacing-lg: clamp(1rem, 3.3vw, 1.5rem);
+    --spacing-xl: clamp(1.5rem, 4.5vw, 2.1rem);
+    
+    --touch-target-min: 2.9rem;
+    --container-padding: clamp(1rem, 4vw, 1.4rem);
+  }
+}
+
+/* ========================================
+   5. 대형 화면 (Large)
+   iPhone Pro Max, 갤럭시 S+/Ultra
+   415px ~ 430px
+   ======================================== */
+
+@media (max-width: 1023px) and (min-width: 415px) and (max-width: 430px) {
+  :root {
+    --font-size-xs: clamp(0.75rem, 2.5vw + 0.5rem, 0.88rem);
+    --font-size-sm: clamp(0.88rem, 2.9vw + 0.6rem, 1.03rem);
+    --font-size-base: clamp(1rem, 3.3vw + 0.7rem, 1.15rem);
+    --font-size-lg: clamp(1.12rem, 3.7vw + 0.8rem, 1.28rem);
+    --font-size-xl: clamp(1.27rem, 4.2vw + 0.9rem, 1.52rem);
+    --font-size-2xl: clamp(1.55rem, 4.8vw + 1rem, 1.95rem);
+    --font-size-3xl: clamp(1.9rem, 5.7vw + 1.1rem, 2.52rem);
+    
+    --spacing-xs: clamp(0.25rem, 1.1vw, 0.48rem);
+    --spacing-sm: clamp(0.5rem, 2.1vw, 0.75rem);
+    --spacing-md: clamp(0.75rem, 2.6vw, 0.97rem);
+    --spacing-lg: clamp(1rem, 3.1vw, 1.47rem);
+    --spacing-xl: clamp(1.45rem, 4.3vw, 2.05rem);
+    
+    --touch-target-min: 2.85rem;
+    --container-padding: clamp(1rem, 3.8vw, 1.35rem);
+  }
+}
+
+/* ========================================
+   6. 초대형 화면 (Extra Large)
+   431px ~ 600px
+   ======================================== */
+
+@media (max-width: 1023px) and (min-width: 431px) and (max-width: 600px) {
+  :root {
+    --font-size-xs: clamp(0.75rem, 2.2vw + 0.52rem, 0.87rem);
+    --font-size-sm: clamp(0.85rem, 2.6vw + 0.62rem, 1.01rem);
+    --font-size-base: clamp(1rem, 3vw + 0.72rem, 1.12rem);
+    --font-size-lg: clamp(1.1rem, 3.4vw + 0.82rem, 1.26rem);
+    --font-size-xl: clamp(1.25rem, 3.9vw + 0.92rem, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 4.5vw + 1.02rem, 1.92rem);
+    --font-size-3xl: clamp(1.85rem, 5.4vw + 1.12rem, 2.48rem);
+    
+    --spacing-xs: clamp(0.25rem, 1vw, 0.46rem);
+    --spacing-sm: clamp(0.5rem, 2vw, 0.73rem);
+    --spacing-md: clamp(0.75rem, 2.5vw, 0.94rem);
+    --spacing-lg: clamp(1rem, 3vw, 1.44rem);
+    --spacing-xl: clamp(1.4rem, 4.1vw, 2rem);
+    
+    --touch-target-min: 2.8rem;
+    --container-padding: clamp(1rem, 3.6vw, 1.3rem);
+  }
+}
+
+/* ========================================
+   7. 폴더블 - 접힌 상태 (Foldable Folded)
+   갤럭시 Z Flip 시리즈
+   ~260px ~ 300px
+   ======================================== */
+
+@media (max-width: 1023px) and (max-width: 300px) {
+  :root {
+    /* 매우 좁은 화면 - 큰 폰트 필수 */
+    --font-size-xs: 0.9rem !important;
+    --font-size-sm: 1.05rem !important;
+    --font-size-base: 1.2rem !important;
+    --font-size-lg: 1.35rem !important;
+    --font-size-xl: 1.6rem !important;
+    --font-size-2xl: 1.95rem !important;
+    --font-size-3xl: 2.5rem !important;
+    
+    --spacing-xs: 0.35rem !important;
+    --spacing-sm: 0.65rem !important;
+    --spacing-md: 0.95rem !important;
+    --spacing-lg: 1.25rem !important;
+    --spacing-xl: 1.9rem !important;
+    
+    --touch-target-min: 3.5rem !important;
+    --container-padding: 0.8rem !important;
+  }
+  
+  /* 경고 메시지 */
+  body::before {
+    content: "📱 접힌 화면 모드";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 149, 0, 0.95);
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    z-index: 9998;
+    font-weight: 600;
+  }
+}
+
+/* ========================================
+   8. 폴더블 - 펼친 상태 (Foldable Unfolded)
+   갤럭시 Z Fold 시리즈
+   ~700px ~ 900px
+   ======================================== */
+
+@media (max-width: 1023px) and (min-width: 700px) {
+  :root {
+    /* 태블릿 크기 - 데스크탑 스타일로 전환 */
+    --font-size-xs: 0.875rem;
+    --font-size-sm: 1rem;
+    --font-size-base: 1.1rem;
+    --font-size-lg: 1.22rem;
+    --font-size-xl: 1.45rem;
+    --font-size-2xl: 1.88rem;
+    --font-size-3xl: 2.4rem;
+    
+    --spacing-xs: 0.4rem;
+    --spacing-sm: 0.7rem;
+    --spacing-md: 0.9rem;
+    --spacing-lg: 1.35rem;
+    --spacing-xl: 1.9rem;
+    
+    --touch-target-min: 2.75rem;
+    --container-padding: clamp(1.5rem, 3vw, 2rem);
+  }
+  
+  /* 태블릿 레이아웃 */
+  .container {
+    max-width: 90%;
+  }
+  
+  /* 그리드 컬럼 증가 */
+  .grid-responsive {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+}
+
+/* ========================================
+   9. 노치/다이내믹 아일랜드 대응
+   iPhone X 이후, 갤럭시 S10 이후
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* iOS Safe Area 지원 */
+  @supports (padding-top: env(safe-area-inset-top)) {
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+    
+    /* 헤더 */
+    header {
+      padding-top: calc(env(safe-area-inset-top) + var(--spacing-md));
+    }
+    
+    /* 하단 네비게이션 */
+    .mobile-nav,
+    [class*="bottom-nav"],
+    [class*="BottomNav"] {
+      padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-sm));
+    }
+    
+    /* 풀스크린 모달 */
+    .modal-fullscreen,
+    [class*="fullscreen"] {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+  
+  /* Android 노치 대응 */
+  @supports (padding-top: constant(safe-area-inset-top)) {
+    body {
+      padding-top: constant(safe-area-inset-top);
+      padding-bottom: constant(safe-area-inset-bottom);
+    }
+  }
+}
+
+/* ========================================
+   10. 가로 모드 (Landscape)
+   모든 기기
+   ======================================== */
+
+@media (max-width: 1023px) and (orientation: landscape) {
+  :root {
+    /* 가로 모드에서 세로 공간 절약 */
+    --font-size-base: clamp(0.92rem, 2.2vw + 0.6rem, 1.02rem);
+    --font-size-xl: clamp(1.18rem, 3.2vw + 0.8rem, 1.35rem);
+    --font-size-2xl: clamp(1.4rem, 3.8vw + 0.9rem, 1.75rem);
+    
+    --spacing-lg: clamp(0.8rem, 2.2vw, 1.2rem);
+    --spacing-xl: clamp(1.2rem, 3.2vw, 1.7rem);
+    
+    --touch-target-min: 2.4rem;
+    --container-padding: clamp(0.8rem, 2.5vw, 1.1rem);
+  }
+  
+  /* 세로 패딩 축소 */
+  section,
+  main > * {
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+  }
+  
+  /* 헤더/푸터 축소 */
+  header,
+  footer {
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
+  }
+  
+  /* 가로 모드 최적화 레이아웃 */
+  .flex-responsive {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   11. 고해상도 화면 (Retina)
+   모든 최신 기기
+   ======================================== */
+
+@media (max-width: 1023px) and (-webkit-min-device-pixel-ratio: 2),
+       (max-width: 1023px) and (min-resolution: 192dpi) {
+  /* 고해상도 폰트 렌더링 */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* 선명한 테두리 */
+  button,
+  input,
+  select,
+  textarea {
+    border-width: 0.5px;
+  }
+}
+
+/* ========================================
+   12. 저해상도 화면 (Legacy)
+   초기 갤럭시/아이폰
+   ======================================== */
+
+@media (max-width: 1023px) and (-webkit-max-device-pixel-ratio: 1),
+       (max-width: 1023px) and (max-resolution: 96dpi) {
+  :root {
+    /* 저해상도에서 더 큰 폰트 */
+    --font-size-base: clamp(1.1rem, 4vw + 0.75rem, 1.3rem);
+    --font-size-xl: clamp(1.45rem, 5vw + 0.95rem, 1.8rem);
+  }
+  
+  /* 두꺼운 테두리 */
+  button,
+  input,
+  select,
+  textarea {
+    border-width: 1px;
+  }
+}
+
+/* ========================================
+   13. 특정 기기 대응 (Specific Devices)
+   ======================================== */
+
+/* iPhone SE 1세대 (320px × 568px) */
+@media (max-width: 1023px) and (max-width: 320px) and (max-height: 568px) {
+  :root {
+    --font-size-base: 1.15rem !important;
+    --touch-target-min: 3.3rem !important;
+  }
+}
+
+/* iPhone 12/13 mini (360px × 780px) */
+@media (max-width: 1023px) and (min-width: 360px) and (max-width: 375px) and (min-height: 780px) {
+  :root {
+    --font-size-base: clamp(1.02rem, 3.9vw + 0.62rem, 1.22rem);
+  }
+}
+
+/* iPhone 14 Pro Max / 15 Pro Max (430px × 932px) */
+@media (max-width: 1023px) and (min-width: 428px) and (max-width: 430px) and (min-height: 926px) {
+  :root {
+    --font-size-base: clamp(1rem, 3.2vw + 0.71rem, 1.14rem);
+  }
+}
+
+/* 갤럭시 S23 Ultra (412px × 915px) */
+@media (max-width: 1023px) and (min-width: 410px) and (max-width: 414px) and (min-height: 910px) {
+  :root {
+    --font-size-base: clamp(1rem, 3.5vw + 0.69rem, 1.16rem);
+  }
+}
+
+/* 갤럭시 Z Fold (펼침, 768px × 2208px) */
+@media (max-width: 1023px) and (min-width: 768px) and (min-height: 2000px) {
+  :root {
+    /* 태블릿 모드 */
+    --font-size-base: 1.08rem;
+    --container-padding: 2rem;
+  }
+  
+  /* 2단 레이아웃 */
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================
+   14. 접근성 - 큰 텍스트 모드
+   ======================================== */
+
+@media (max-width: 1023px) and (prefers-contrast: more) {
+  :root {
+    /* 고대비 모드에서 더 큰 폰트 */
+    --font-size-base: calc(var(--font-size-base) * 1.1);
+    --font-size-xl: calc(var(--font-size-xl) * 1.1);
+  }
+}
+
+/* ========================================
+   15. 터치 타겟 최소 크기 보장
+   모든 모바일 기기
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* WCAG 2.1 AAA + Apple HIG 준수 */
+  a,
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  [role="button"],
+  [onclick] {
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 텍스트 링크 예외 (패딩으로 터치 영역 확보) */
+  a:not([class*="btn"]) {
+    padding: 0.5rem;
+    margin: -0.5rem;
+  }
+}
+
+/* ========================================
+   16. 오래된 브라우저 대응
+   초기 갤럭시/아이폰
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* Flexbox 대체 */
+  @supports not (display: flex) {
+    .flex-responsive {
+      display: block;
+    }
+    
+    .flex-responsive > * {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+  
+  /* Grid 대체 */
+  @supports not (display: grid) {
+    .grid-responsive {
+      display: block;
+    }
+    
+    .grid-responsive > * {
+      display: inline-block;
+      width: calc(50% - 1rem);
+      vertical-align: top;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  /* CSS Variables 대체 */
+  @supports not (--custom: property) {
+    body {
+      font-size: 16px;
+    }
+    
+    h1 { font-size: 32px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 24px; }
+    
+    button {
+      padding: 12px 20px;
+      min-height: 44px;
+    }
+  }
+}
+
+/* ========================================
+   17. 성능 최적화
+   모든 모바일 기기
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* GPU 가속 */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: auto;
+  }
+  
+  /* 스크롤 최적화 */
+  body,
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* 탭 하이라이트 제거 */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ========================================
+   18. 배터리 세이버 모드
+   ======================================== */
+
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  /* 모든 애니메이션 최소화 */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   19. 다크 모드 대응
+   모든 모바일 기기
+   ======================================== */
+
+@media (max-width: 1023px) and (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --card-bg: #1c1c1e;
+    --border-color: #38383a;
+  }
+  
+  body {
+    background: var(--background);
+    color: var(--foreground);
+  }
+  
+  .ios-card,
+  .card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+  }
+}
+
+/* ========================================
+   20. 디버그 정보 (개발 모드)
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* 
+  body::after {
+    content: "📱 W:" attr(data-viewport-width) " H:" attr(data-viewport-height);
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    background: rgba(255, 59, 48, 0.9);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    font-size: 0.7rem;
+    z-index: 9998;
+    pointer-events: none;
+    font-family: monospace;
+  }
+  */
+}

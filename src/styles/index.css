@@ -1,0 +1,66 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* ========================================
+   전역 스크롤바 숨김
+   ======================================== */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body,
+#root {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-x: hidden;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+/* Rolling animation for HomePage */
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Slide in from right animation for mobile sidebar */
+@keyframes slideInRight {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideInRightTransform {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

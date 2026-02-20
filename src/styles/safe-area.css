@@ -1,0 +1,315 @@
+/**
+ * Safe Area Insets 완벽 대응
+ * 
+ * iPhone X 이후 노치/다이내믹 아일랜드
+ * 삼성 갤럭시 S10 이후 펀치홀
+ * 폴더블 기기 특수 화면
+ */
+
+/* ========================================
+   1. 전역 Safe Area 변수 설정
+   ======================================== */
+
+:root {
+  /* Safe Area 값 가져오기 */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+  
+  /* 추가 여백과 조합 */
+  --safe-top-with-padding: calc(env(safe-area-inset-top, 0px) + 16px);
+  --safe-bottom-with-padding: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  --safe-left-with-padding: calc(env(safe-area-inset-left, 0px) + 16px);
+  --safe-right-with-padding: calc(env(safe-area-inset-right, 0px) + 16px);
+}
+
+/* ========================================
+   2. 모바일 전용 적용
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* body 전체에 Safe Area 적용 */
+  body {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  
+  /* 풀스크린 요소 (모달, 오버레이) */
+  .fullscreen,
+  [class*="fullscreen"],
+  .modal-fullscreen,
+  .overlay-fullscreen {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  
+  /* Fixed 요소 - 상단 */
+  header,
+  .header,
+  [class*="header"] {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  }
+  
+  /* Fixed 요소 - 하단 */
+  footer,
+  .footer,
+  nav[class*="bottom"],
+  [class*="bottom-nav"],
+  [class*="BottomNav"] {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+  
+  /* 고정 위치 버튼 */
+  .fixed-button,
+  [class*="floating-button"],
+  [class*="FloatingButton"],
+  .fab {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+}
+
+/* ========================================
+   3. 가로 모드 대응
+   ======================================== */
+
+@media (max-width: 1023px) and (orientation: landscape) {
+  /* 가로 모드에서는 좌우 Safe Area 중요 */
+  body {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  
+  /* 컨테이너 좌우 여백 */
+  .container,
+  main,
+  section {
+    padding-left: calc(env(safe-area-inset-left, 0px) + 1rem);
+    padding-right: calc(env(safe-area-inset-right, 0px) + 1rem);
+  }
+}
+
+/* ========================================
+   4. 노치/다이내믹 아일랜드 감지
+   ======================================== */
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  @media (max-width: 1023px) {
+    /* Safe Area가 있는 기기 (노치/다이내믹 아일랜드) */
+    body[data-has-notch="true"],
+    body[data-has-dynamic-island="true"] {
+      /* 상단 여백 추가 */
+      --header-height: calc(3.5rem + env(safe-area-inset-top, 0px));
+    }
+    
+    /* 상태바 영역 (status bar) */
+    .status-bar,
+    [class*="status-bar"] {
+      height: env(safe-area-inset-top, 0px);
+      background: transparent;
+    }
+  }
+}
+
+/* ========================================
+   5. 홈 인디케이터 (Home Indicator)
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* iPhone X 이후 홈 바 영역 */
+  .home-indicator-space,
+  [class*="home-indicator"] {
+    height: env(safe-area-inset-bottom, 0px);
+    min-height: env(safe-area-inset-bottom, 0px);
+  }
+  
+  /* 하단 버튼을 홈 인디케이터 위로 */
+  .button-above-home-indicator {
+    margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+}
+
+/* ========================================
+   6. 스크롤 영역 Safe Area
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* 전체 높이 스크롤 컨테이너 */
+  .scroll-container-full,
+  [class*="scroll-container"] {
+    height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  /* 상단 고정 헤더가 있는 경우 */
+  .scroll-with-header {
+    height: calc(100vh - var(--header-height, 3.5rem) - env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  /* 하단 네비게이션이 있는 경우 */
+  .scroll-with-bottom-nav {
+    height: calc(100vh - env(safe-area-inset-top, 0px) - 5rem - env(safe-area-inset-bottom, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ========================================
+   7. 폴더블 기기 대응
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* 갤럭시 Z Fold (펼침) */
+  body[data-is-foldable="true"][data-is-folded="false"] {
+    /* 펼친 상태에서는 태블릿처럼 */
+    padding: env(safe-area-inset-top, 0px) 
+             env(safe-area-inset-right, 0px) 
+             env(safe-area-inset-bottom, 0px) 
+             env(safe-area-inset-left, 0px);
+  }
+  
+  /* 갤럭시 Z Flip (접힘) */
+  body[data-is-foldable="true"][data-is-folded="true"] {
+    /* 접힌 상태에서는 더 큰 여백 */
+    padding: calc(env(safe-area-inset-top, 0px) + 0.5rem)
+             calc(env(safe-area-inset-right, 0px) + 0.5rem)
+             calc(env(safe-area-inset-bottom, 0px) + 0.5rem)
+             calc(env(safe-area-inset-left, 0px) + 0.5rem);
+  }
+}
+
+/* ========================================
+   8. 유틸리티 클래스
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* Safe Area Padding */
+  .safe-p-top {
+    padding-top: env(safe-area-inset-top, 0px) !important;
+  }
+  
+  .safe-p-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+  
+  .safe-p-left {
+    padding-left: env(safe-area-inset-left, 0px) !important;
+  }
+  
+  .safe-p-right {
+    padding-right: env(safe-area-inset-right, 0px) !important;
+  }
+  
+  .safe-p-all {
+    padding: env(safe-area-inset-top, 0px)
+             env(safe-area-inset-right, 0px)
+             env(safe-area-inset-bottom, 0px)
+             env(safe-area-inset-left, 0px) !important;
+  }
+  
+  /* Safe Area Margin */
+  .safe-m-top {
+    margin-top: env(safe-area-inset-top, 0px) !important;
+  }
+  
+  .safe-m-bottom {
+    margin-bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+  
+  .safe-m-left {
+    margin-left: env(safe-area-inset-left, 0px) !important;
+  }
+  
+  .safe-m-right {
+    margin-right: env(safe-area-inset-right, 0px) !important;
+  }
+  
+  /* Safe Area Height */
+  .safe-h-screen {
+    height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) !important;
+  }
+  
+  .safe-min-h-screen {
+    min-height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) !important;
+  }
+  
+  /* Safe Area Position */
+  .safe-top-0 {
+    top: env(safe-area-inset-top, 0px) !important;
+  }
+  
+  .safe-bottom-0 {
+    bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+  
+  .safe-left-0 {
+    left: env(safe-area-inset-left, 0px) !important;
+  }
+  
+  .safe-right-0 {
+    right: env(safe-area-inset-right, 0px) !important;
+  }
+}
+
+/* ========================================
+   9. 디버그 시각화 (개발 모드)
+   ======================================== */
+
+/* 
+@media (max-width: 1023px) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top, 0px);
+    background: rgba(255, 0, 0, 0.2);
+    z-index: 9999;
+    pointer-events: none;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-bottom, 0px);
+    background: rgba(0, 0, 255, 0.2);
+    z-index: 9999;
+    pointer-events: none;
+  }
+}
+*/
+
+/* ========================================
+   10. 레거시 브라우저 대응
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* constant() 폴백 (구형 iOS) */
+  @supports (padding-top: constant(safe-area-inset-top)) {
+    body {
+      padding-top: constant(safe-area-inset-top);
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-left: constant(safe-area-inset-left);
+      padding-right: constant(safe-area-inset-right);
+    }
+    
+    header {
+      padding-top: calc(constant(safe-area-inset-top) + 1rem);
+    }
+    
+    footer,
+    nav[class*="bottom"] {
+      padding-bottom: calc(constant(safe-area-inset-bottom) + 1rem);
+    }
+  }
+}

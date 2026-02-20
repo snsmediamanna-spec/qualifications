@@ -1,0 +1,55 @@
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.rolling-scroll {
+  animation: scrollUp 30s linear infinite;
+}
+
+.rolling-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* 슬라이더 dots 커스텀 스타일 */
+.slider-custom-dots .slick-dots {
+  bottom: 16px;
+  z-index: 10;
+}
+
+.slider-custom-dots .slick-dots li {
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+}
+
+.slider-custom-dots .slick-dots li button {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+}
+
+.slider-custom-dots .slick-dots li button:before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: rgba(100, 116, 139, 0.4);
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.slider-custom-dots .slick-dots li.slick-active button:before {
+  background-color: #2563eb;
+  width: 32px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+.slider-custom-dots .slick-dots li:hover button:before {
+  background-color: rgba(37, 99, 235, 0.6);
+}

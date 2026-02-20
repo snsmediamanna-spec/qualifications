@@ -1,0 +1,334 @@
+/**
+ * 디스플레이 크기 설정 핸들러
+ * 시스템 설정의 "디스플레이 크기" 최소/최대에 대응
+ * 
+ * Android/iOS에서 사용자가 설정 > 디스플레이 > 크기를 변경하면:
+ * - 가장 작게: viewport는 커지고 콘텐츠는 작아짐
+ * - 가장 크게: viewport는 작아지고 콘텐츠는 커짐
+ */
+
+/* ========================================
+   1. 극단적 작은 viewport (디스플레이 크기 "가장 크게")
+   ======================================== */
+
+/* 📱 초소형 화면: ~320px (iPhone SE 최소, 디스플레이 크기 최대) */
+@media (max-width: 1023px) and (max-width: 340px) {
+  :root {
+    /* 작은 viewport에서 더 큰 상대 크기 */
+    --font-size-xs: clamp(0.8rem, 3vw + 0.4rem, 0.95rem);
+    --font-size-sm: clamp(0.95rem, 3.5vw + 0.5rem, 1.1rem);
+    --font-size-base: clamp(1.05rem, 4vw + 0.6rem, 1.25rem);
+    --font-size-lg: clamp(1.2rem, 4.5vw + 0.7rem, 1.4rem);
+    --font-size-xl: clamp(1.4rem, 5vw + 0.8rem, 1.7rem);
+    --font-size-2xl: clamp(1.7rem, 6vw + 0.9rem, 2.2rem);
+    --font-size-3xl: clamp(2.1rem, 7vw + 1rem, 2.8rem);
+    
+    /* 간격도 비례 확대 */
+    --spacing-xs: clamp(0.3rem, 1.5vw, 0.6rem);
+    --spacing-sm: clamp(0.6rem, 2.5vw, 0.9rem);
+    --spacing-md: clamp(0.85rem, 3vw, 1.2rem);
+    --spacing-lg: clamp(1.1rem, 3.5vw, 1.7rem);
+    --spacing-xl: clamp(1.7rem, 5vw, 2.3rem);
+    --spacing-2xl: clamp(2.3rem, 6vw, 3.2rem);
+    
+    /* 버튼/입력 필드 */
+    --touch-target-min: 3rem; /* 48px */
+    --button-font-size: clamp(1.05rem, 4vw + 0.6rem, 1.25rem);
+    
+    /* 패딩 */
+    --container-padding: clamp(1.1rem, 4.5vw, 1.5rem);
+  }
+  
+  /* 아이콘 크기 */
+  svg {
+    width: clamp(1.3em, 5vw, 1.8em);
+    height: clamp(1.3em, 5vw, 1.8em);
+  }
+  
+  /* 버튼 */
+  button,
+  .btn {
+    font-size: var(--button-font-size);
+    padding: clamp(0.8rem, 3vw, 1.1rem) clamp(1rem, 4vw, 1.4rem);
+    min-height: var(--touch-target-min);
+  }
+  
+  /* 입력 필드 */
+  input,
+  textarea,
+  select {
+    font-size: var(--font-size-base);
+    padding: clamp(0.85rem, 3vw, 1.2rem);
+    min-height: var(--touch-target-min);
+  }
+}
+
+/* ========================================
+   2. 작은 viewport (디스플레이 크기 "크게")
+   ======================================== */
+
+/* 📱 소형 화면: 341px ~ 375px */
+@media (max-width: 1023px) and (min-width: 341px) and (max-width: 375px) {
+  :root {
+    --font-size-xs: clamp(0.78rem, 2.8vw + 0.45rem, 0.92rem);
+    --font-size-sm: clamp(0.92rem, 3.2vw + 0.55rem, 1.08rem);
+    --font-size-base: clamp(1.03rem, 3.8vw + 0.65rem, 1.2rem);
+    --font-size-lg: clamp(1.18rem, 4.2vw + 0.75rem, 1.35rem);
+    --font-size-xl: clamp(1.35rem, 4.8vw + 0.85rem, 1.6rem);
+    --font-size-2xl: clamp(1.65rem, 5.5vw + 0.95rem, 2.1rem);
+    --font-size-3xl: clamp(2rem, 6.5vw + 1.05rem, 2.7rem);
+    
+    --spacing-xs: clamp(0.28rem, 1.3vw, 0.55rem);
+    --spacing-sm: clamp(0.55rem, 2.3vw, 0.85rem);
+    --spacing-md: clamp(0.8rem, 2.8vw, 1.1rem);
+    --spacing-lg: clamp(1.05rem, 3.3vw, 1.6rem);
+    --spacing-xl: clamp(1.6rem, 4.8vw, 2.2rem);
+    
+    --touch-target-min: 2.9rem;
+    --button-font-size: clamp(1.03rem, 3.8vw + 0.65rem, 1.2rem);
+    --container-padding: clamp(1.05rem, 4.2vw, 1.45rem);
+  }
+}
+
+/* ========================================
+   3. 중간 viewport (디스플레이 크기 "기본")
+   ======================================== */
+
+/* 📱 중형 화면: 376px ~ 414px (대부분의 기본 설정) */
+@media (max-width: 1023px) and (min-width: 376px) and (max-width: 414px) {
+  :root {
+    /* 이상적인 균형 - 두 번째 이미지 기준 */
+    --font-size-xs: clamp(0.75rem, 2.5vw + 0.5rem, 0.9rem);
+    --font-size-sm: clamp(0.9rem, 3vw + 0.6rem, 1.05rem);
+    --font-size-base: clamp(1rem, 3.5vw + 0.7rem, 1.15rem);
+    --font-size-lg: clamp(1.15rem, 4vw + 0.8rem, 1.3rem);
+    --font-size-xl: clamp(1.3rem, 4.5vw + 0.9rem, 1.55rem);
+    --font-size-2xl: clamp(1.6rem, 5vw + 1rem, 2rem);
+    --font-size-3xl: clamp(1.95rem, 6vw + 1.1rem, 2.6rem);
+    
+    --spacing-xs: clamp(0.25rem, 1.2vw, 0.5rem);
+    --spacing-sm: clamp(0.5rem, 2.2vw, 0.8rem);
+    --spacing-md: clamp(0.75rem, 2.7vw, 1rem);
+    --spacing-lg: clamp(1rem, 3.2vw, 1.5rem);
+    --spacing-xl: clamp(1.5rem, 4.5vw, 2.1rem);
+    
+    --touch-target-min: 2.85rem;
+    --button-font-size: clamp(1rem, 3.5vw + 0.7rem, 1.15rem);
+    --container-padding: clamp(1rem, 4vw, 1.4rem);
+  }
+}
+
+/* ========================================
+   4. 큰 viewport (디스플레이 크기 "작게")
+   ======================================== */
+
+/* 📱 대형 화면: 415px ~ 480px */
+@media (max-width: 1023px) and (min-width: 415px) and (max-width: 480px) {
+  :root {
+    /* 큰 viewport에서는 상대 크기 낮춤 */
+    --font-size-xs: clamp(0.75rem, 2.2vw + 0.5rem, 0.88rem);
+    --font-size-sm: clamp(0.88rem, 2.7vw + 0.6rem, 1.02rem);
+    --font-size-base: clamp(1rem, 3.2vw + 0.7rem, 1.12rem);
+    --font-size-lg: clamp(1.12rem, 3.7vw + 0.8rem, 1.27rem);
+    --font-size-xl: clamp(1.27rem, 4.2vw + 0.9rem, 1.5rem);
+    --font-size-2xl: clamp(1.55rem, 4.8vw + 1rem, 1.95rem);
+    --font-size-3xl: clamp(1.9rem, 5.7vw + 1.1rem, 2.5rem);
+    
+    --spacing-xs: clamp(0.25rem, 1vw, 0.48rem);
+    --spacing-sm: clamp(0.5rem, 2vw, 0.75rem);
+    --spacing-md: clamp(0.75rem, 2.5vw, 0.95rem);
+    --spacing-lg: clamp(1rem, 3vw, 1.45rem);
+    --spacing-xl: clamp(1.45rem, 4.2vw, 2rem);
+    
+    --touch-target-min: 2.8rem;
+    --button-font-size: clamp(1rem, 3.2vw + 0.7rem, 1.12rem);
+    --container-padding: clamp(1rem, 3.8vw, 1.35rem);
+  }
+}
+
+/* ========================================
+   5. 극단적 큰 viewport (디스플레이 크기 "가장 작게")
+   ======================================== */
+
+/* 📱 초대형 화면: 481px ~ 1023px */
+@media (max-width: 1023px) and (min-width: 481px) {
+  :root {
+    /* 매우 큰 viewport - 더 작은 상대 크기 */
+    --font-size-xs: clamp(0.75rem, 2vw + 0.5rem, 0.85rem);
+    --font-size-sm: clamp(0.85rem, 2.5vw + 0.6rem, 1rem);
+    --font-size-base: clamp(1rem, 3vw + 0.7rem, 1.1rem);
+    --font-size-lg: clamp(1.1rem, 3.5vw + 0.8rem, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 4vw + 0.9rem, 1.48rem);
+    --font-size-2xl: clamp(1.5rem, 4.6vw + 1rem, 1.9rem);
+    --font-size-3xl: clamp(1.85rem, 5.5vw + 1.1rem, 2.45rem);
+    
+    --spacing-xs: clamp(0.25rem, 0.9vw, 0.45rem);
+    --spacing-sm: clamp(0.5rem, 1.9vw, 0.72rem);
+    --spacing-md: clamp(0.75rem, 2.4vw, 0.9rem);
+    --spacing-lg: clamp(1rem, 2.9vw, 1.4rem);
+    --spacing-xl: clamp(1.4rem, 4vw, 1.95rem);
+    
+    --touch-target-min: 2.75rem;
+    --button-font-size: clamp(1rem, 3vw + 0.7rem, 1.1rem);
+    --container-padding: clamp(1rem, 3.6vw, 1.3rem);
+  }
+}
+
+/* ========================================
+   6. 극단적 상황 감지 및 강제 최소값
+   ======================================== */
+
+/* 🚨 위기 상황: viewport 300px 이하 (거의 불가능하지만 대비) */
+@media (max-width: 1023px) and (max-width: 300px) {
+  :root {
+    /* 절대 최소 가독성 보장 */
+    --font-size-xs: 0.85rem !important;
+    --font-size-sm: 1rem !important;
+    --font-size-base: 1.1rem !important;
+    --font-size-lg: 1.25rem !important;
+    --font-size-xl: 1.5rem !important;
+    --font-size-2xl: 1.85rem !important;
+    --font-size-3xl: 2.3rem !important;
+    
+    --touch-target-min: 3.2rem !important;
+    --container-padding: 1.2rem !important;
+  }
+  
+  /* 경고 표시 */
+  body::before {
+    content: "⚠️ 화면이 너무 작습니다";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #FF3B30;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    z-index: 9999;
+  }
+}
+
+/* 🚨 위기 상황: viewport 600px 이상 (태블릿 크기인데 모바일로 감지) */
+@media (max-width: 1023px) and (min-width: 600px) {
+  :root {
+    /* 태블릿 전환 준비 */
+    --font-size-base: clamp(1rem, 2.5vw + 0.75rem, 1.08rem);
+    --font-size-xl: clamp(1.25rem, 3.5vw + 0.95rem, 1.45rem);
+    --font-size-2xl: clamp(1.5rem, 4vw + 1.05rem, 1.85rem);
+    
+    --container-padding: clamp(1.2rem, 3.2vw, 1.5rem);
+    --spacing-lg: clamp(1.2rem, 2.8vw, 1.6rem);
+  }
+}
+
+/* ========================================
+   7. 가로 모드 대응
+   ======================================== */
+
+/* 📱 가로 모드 (landscape) */
+@media (max-width: 1023px) and (orientation: landscape) {
+  :root {
+    /* 가로 모드에서는 세로 공간이 부족하므로 크기 축소 */
+    --font-size-base: clamp(0.95rem, 2.5vw + 0.65rem, 1.05rem);
+    --font-size-xl: clamp(1.2rem, 3.5vw + 0.85rem, 1.4rem);
+    --font-size-2xl: clamp(1.45rem, 4vw + 0.95rem, 1.8rem);
+    
+    --spacing-lg: clamp(0.9rem, 2.5vw, 1.3rem);
+    --spacing-xl: clamp(1.3rem, 3.5vw, 1.8rem);
+    
+    --touch-target-min: 2.5rem;
+    --container-padding: clamp(0.9rem, 3vw, 1.2rem);
+  }
+  
+  /* 세로 패딩 축소 */
+  section {
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+  }
+  
+  /* 헤더 축소 */
+  header {
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+  }
+}
+
+/* ========================================
+   8. 디버그 정보 (개발용 - 삭제 가능)
+   ======================================== */
+
+/* 🔍 개발 모드: 현재 viewport와 디스플레이 정보 표시 */
+@media (max-width: 1023px) {
+  /* 
+  body::after {
+    content: "📱 " attr(data-viewport);
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 122, 255, 0.9);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  */
+}
+
+/* ========================================
+   9. 폰트 스무딩 최적화
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* 작은 화면에서 폰트 렌더링 최적화 */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* 소수점 픽셀 방지 (crisp rendering) */
+  body {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* ========================================
+   10. 터치 타겟 크기 보장
+   ======================================== */
+
+@media (max-width: 1023px) {
+  /* WCAG 2.1 Level AAA 준수: 최소 44×44px */
+  button,
+  a,
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+  }
+  
+  /* 작은 버튼에 패딩 추가 */
+  button:not([class*="icon-only"]),
+  .btn:not([class*="icon-only"]) {
+    padding: clamp(0.7rem, 2.5vw, 1rem) clamp(1rem, 3.5vw, 1.5rem);
+  }
+  
+  /* 아이콘 전용 버튼 */
+  button[class*="icon-only"],
+  .btn[class*="icon-only"] {
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

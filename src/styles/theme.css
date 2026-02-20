@@ -1,0 +1,382 @@
+@custom-variant dark (&:is(.dark *));
+
+/* 
+  업계 표준 반응형 Breakpoint 기준
+  - 모바일: 360x640 (Android), 375x667 (iOS)
+  - 태블릿: 1024x768
+  - PC: 1920x1080, 1366x768
+  
+  Breakpoint 분기점:
+  360 / 640 / 720 / 1024 / 1334 / 1600 / 1920
+  
+  @media all and (max-width: 640px)  - 모바일
+  @media all and (max-width: 768px)  - 모바일/태블릿
+  @media all and (max-width: 981px)  - 태블릿/모바일
+  @media all and (max-width: 1180px) - 데스크탑 소형
+  @media all and (max-width: 1280px) - 데스크탑 중형
+  @media all and (max-width: 1500px) - 데스크탑 대형
+*/
+
+:root {
+  --font-size: 16px;
+  --background: #f2efe9;
+  --foreground: #1a1c1b;
+  --card: #ffffff;
+  --card-foreground: #1a1c1b;
+  --popover: #ffffff;
+  --popover-foreground: #1a1c1b;
+  --primary: #6cb25b;
+  --primary-foreground: #ffffff;
+  --secondary: #d9d5cd;
+  --secondary-foreground: #1a1c1b;
+  --muted: #e5e1d8;
+  --muted-foreground: #6b6d6a;
+  --accent: #d9d5cd;
+  --accent-foreground: #1a1c1b;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.05);
+  --input: transparent;
+  --input-background: #ffffff;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 300;
+  --ring: #6cb25b;
+  --chart-1: #6cb25b;
+  --chart-2: #8aab87;
+  --chart-3: #d9d5cd;
+  --chart-4: #9ca39b;
+  --chart-5: #567d52;
+  --radius: 0.5rem;
+  --sidebar: #f2efe9;
+  --sidebar-foreground: #1a1c1b;
+  --sidebar-primary: #6cb25b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e5e1d8;
+  --sidebar-accent-foreground: #1a1c1b;
+  --sidebar-border: rgba(0, 0, 0, 0.05);
+  --sidebar-ring: #6cb25b;
+  
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.dark {
+  --background: #1a1c1b;
+  --foreground: #f2efe9;
+  --card: #252726;
+  --card-foreground: #f2efe9;
+  --popover: #252726;
+  --popover-foreground: #f2efe9;
+  --primary: #93b190;
+  --primary-foreground: #1a1c1b;
+  --secondary: #3a3c3a;
+  --secondary-foreground: #f2efe9;
+  --muted: #3a3c3a;
+  --muted-foreground: #9ca39b;
+  --accent: #3a3c3a;
+  --accent-foreground: #f2efe9;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: rgba(255, 255, 255, 0.05);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #93b190;
+  --font-weight-medium: 500;
+  --font-weight-normal: 300;
+  --chart-1: #93b190;
+  --chart-2: #6cb25b;
+  --chart-3: #d9d5cd;
+  --chart-4: #9ca39b;
+  --chart-5: #567d52;
+  --sidebar: #252726;
+  --sidebar-foreground: #f2efe9;
+  --sidebar-primary: #93b190;
+  --sidebar-primary-foreground: #1a1c1b;
+  --sidebar-accent: #3a3c3a;
+  --sidebar-accent-foreground: #f2efe9;
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-ring: #93b190;
+  
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    /* 모든 요소에서 가로 스크롤 방지 */
+    box-sizing: border-box;
+  }
+
+  html {
+    /* 시스템 폰트 크기 설정 무시 - UI 일관성 유지 */
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+    /* 부드러운 스크롤 */
+    scroll-behavior: smooth;
+    /* 핀치 줌 허용 */
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", "Noto Sans KR", "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    /* 기본 폰트 크기 고정 */
+    font-size: 16px !important;
+    /* 모바일 최적화 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 안전 영역 고려 (노치 대응) */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* 디스플레이 크기 설정 무시 */
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+    /* 핀치 줌 허용 */
+    touch-action: manipulation;
+  }
+
+  /* 루트 요소 */
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    /* 버튼 폰트 크기 고정 - 시스템 설정 무시 */
+    font-size: 16px !important;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    /* 모바일 터치 최적화 - 최소 44x44px 권장 */
+    min-height: 44px;
+    /* 탭 하이라이트 제거 */
+    -webkit-tap-highlight-color: transparent;
+    /* 디스플레이 크기 설정 무시 */
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+
+  input, textarea, select {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+    /* iOS 입력 필드 기본 스타일 제거 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* 최소 16px로 iOS 자동 줌 방지 */
+    font-size: max(16px, var(--text-base)) !important;
+    /* 디스플레이 크기 설정 무시 */
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+
+  /* 이미지 가로 스크롤 방지 */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 컨테이너 가로 스크롤 방지 */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 모바일 네비게이션 바 크기 고정 */
+  nav {
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+
+  /* SVG 크기 고정 */
+  svg {
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+}
+
+@layer utilities {
+  /* 스크롤바 숨기기 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+
+  /* 로딩 화면 애니메이션 */
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 8s linear infinite;
+  }
+
+  .animate-pulse-gentle {
+    animation: pulse-gentle 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  .delay-1000 {
+    animation-delay: 1s;
+  }
+
+  /* Glass effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes pulse-gentle {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.4;
+    }
+    25% {
+      transform: translateY(-10px) translateX(5px);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-5px) translateX(-5px);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translateY(5px) translateX(5px);
+      opacity: 0.6;
+    }
+  }
+
+  /* 사이드바 슬라이드 애니메이션 */
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
